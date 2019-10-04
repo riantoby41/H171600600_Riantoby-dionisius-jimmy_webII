@@ -4,84 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Galeri;
+use App\KategoriGaleri;
 
 class GaleriController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $galeri=galeri::all();
-        
-        return view('galeri.index',compact('galeri'));
-    }
+    function index(){
+        $Galeri=Galeri::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view ('galeri.index',compact('Galeri'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+    
+    	$galeri=galeri::find($id);
+
+    	return view(  'galeri.show',compact( 'galeri'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function create()
     {
-        //
-    }
+    	$KategoriGaleri=KategoriGaleri::pluck('nama','id');
+    	
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    	return view( 'galeri.create',compact('KategoriGaleri'));
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function store(Request $request)
     {
-        //
+    	$input= $request->all();
+    	
+    	galeri::create($input);
+
+    	return redirect(route('galeri.index'));
     }
 }
