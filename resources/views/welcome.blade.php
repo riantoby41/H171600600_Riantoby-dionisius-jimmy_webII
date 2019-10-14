@@ -82,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Whats's up yo ee meen
+                    Whats up yo ee meen
                 </div>
 
                 <div class="links">

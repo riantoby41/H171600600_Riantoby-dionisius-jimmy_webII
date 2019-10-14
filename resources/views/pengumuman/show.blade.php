@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Pengumuman</div>
+                <div class="card-header text-center bg-info">Pengumuman</div>
                 
                 <div class="card-body">
                     <div class="form-group row">

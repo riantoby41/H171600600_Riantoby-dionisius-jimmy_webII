@@ -3,13 +3,15 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header text-center bg-info"  >Kategori Galeri</div>
-                <div class="card-body">
+                <div class="card-body bg-danger">
                 <a href="{!! route('kategori_galeri.create')!!}" class="btn btn-primary btn-outline-danger">{{ __('Tambah Data')}}</a>
-                <div class="col text-center">
-                <table class="table table-bordered">
+                <a href="{!! route('home')!!}" class="btn btn-success">{{ __('Home')}}</a>
+             
+                <div class="col text-center ">
+                <table class="table table-bordered bg-white">
                     <thead class ="bg-success">
                             <tr>
                                 <th scope="col">Id</th>
@@ -29,9 +31,14 @@
                                 <td>{!! $item->users_id!!}</td>
                                 <td>{!! $item->created_at->format('d/m/Y H:i:s') !!}</td>
                                 <td>
-                                <button class="btn btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
-                                <a href="{!! route('kategori_galeri.show',[$item-> id]) !!}" button class="btn btn-success " >Lihat Detail</a>
+                                <a href="{!! route('kategori_galeri.show',[$item-> id]) !!}" button class="btn btn-sm btn-success" >Lihat Detail</a>
                                 
+                                <a href="{!! route('kategori_galeri.edit',[$item-> id]) !!}" button class="btn btn-sm btn-warning" >Edit</a>
+                             
+                                {!! Form::open(['route' => ['kategori_galeri.destroy', $item->id],'method' => 'delete']) !!}
+
+                                {!! Form::submit('Hapus', ['class'=>'btn  btn-sm btn-danger','onclick'=>"return confirm('Apakah Anda yakin menghapus data ini ?')"]); !!}
+                                {!! Form::close() !!}
                                 </td>
                             </tr>
                             @endforeach

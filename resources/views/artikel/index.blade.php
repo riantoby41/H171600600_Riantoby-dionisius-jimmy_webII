@@ -3,14 +3,18 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header text-center bg-info"  >Artikel</div>
-                <div class="card-body">
-                <a href="{!! route('artikel.create')!!}" class="btn btn-primary btn-outline-danger">{{ __('Tambah Data')}}</a>
-                <div class="col text-center">
-                <table class="table table-bordered">
-                    <thead class ="bg-success">
+                <div class="card-header text-center bg-success"  >Artikel</div>
+                <div class="card-body bg-danger">
+                <a href="{!! route('artikel.create')!!}" class="btn btn-warning">{{ __('Tambah Data')}}</a>
+                <a href="{!! route('kategori_artikel.index')!!}" class="btn btn-warning">{{ __('Lihat Kategori Artikel')}}</a>
+                <a href="{!! route('home')!!}" class="btn btn-warning">{{ __('Home')}}</a>
+                
+                <div class="col text-center ">
+                <br>
+                <table class="table table-bordered bg-success">
+                    <thead class ="bg-info">
                             <tr>
                                 <th scope="col">Id</th>
                                 <th scope="col">Judul</th>
@@ -31,9 +35,14 @@
                                 <td>{!! $item->kategori_artikel_id!!}</td>
 
                                 <td>
-                                <button class="btn btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
-                                <a href="{!! route('artikel.show',[$item-> id]) !!}" button class="btn btn-success " >Lihat Detail</a>
+                                <a href="{!! route('artikel.show',[$item-> id]) !!}" button class="btn btn-sn  btn-success" >Lihat Detail</a>
                                 
+                                <a href="{!! route('artikel.edit',[$item-> id]) !!}" button class="btn btn-sm btn-warning" >Edit</a>
+                             
+                                {!! Form::open(['route' => ['artikel.destroy', $item->id],'method' => 'delete']) !!}
+
+                                {!! Form::submit('Hapus', ['class'=>'btn  btn-sm btn-danger','onclick'=>"return confirm('Apakah Anda yakin menghapus data ini ?')"]); !!}
+                                {!! Form::close() !!}
                                 </td>
                             </tr>
                             @endforeach

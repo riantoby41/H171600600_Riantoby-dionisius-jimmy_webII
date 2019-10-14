@@ -1,5 +1,3 @@
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -7,12 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header text-center bg-info">Tambah Kategori Artikel</div>
+                <div class="card-header text-center bg-info">Edit Kategori Berita</div>
              
              <div class="card-body">
-                 {!! Form::open(['route' => 'kategori_artikel.store', 'method' => 'post']) !!} 
-             	@include('kategori_artikel.form')
-
+                {!! Form::model($kategori_berita, ['route' => ['kategori_berita.update', $kategori_berita->id],'method' => 'patch']) !!}
+             	@include('kategori_berita.form')
              	{!! Form::close() !!}
             </div>
             </div>

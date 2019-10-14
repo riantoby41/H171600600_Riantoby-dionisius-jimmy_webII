@@ -33,4 +33,40 @@ class KategoriBeritaController extends Controller
 
         return redirect()->route('kategori_berita.index')->with ('alert-success','Data berhasi ditambah!');
     }
+
+
+    public function update($id,Request $request)
+    {
+    
+        $kategori_berita=KategoriBerita::find($id);
+        $input= $request->all();
+
+        if (empty($kategori_berita))
+        { return redirect(route('kategori_berita.index')); }
+
+        $kategori_berita->update($input);
+        return redirect(route('kategori_berita.index'));
+        
+    }
+
+    public function destroy($id)
+    {
+    
+        $kategori_berita=KategoriBerita::find($id);
+
+        if (empty($kategori_berita))
+        { return redirect(route('kategori_berita.index')); }
+
+        $kategori_berita->delete();
+        return redirect(route('kategori_berita.index'));
+    }
+
+    public function trash()
+    {
+        $KategoriBerita=KategoriBerita::onlyTrashed()
+        ->whereNotNull('deleted_at')
+        ->get();
+        
+        return view('kategori_berita.index',compact('KategoriBerita'));
+    }
 }
